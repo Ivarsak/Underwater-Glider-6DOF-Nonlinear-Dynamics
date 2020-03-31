@@ -5,6 +5,5 @@ The main goal of the script is to simulate a steady spiral motion.
  The dynamic model and the hydrodynamic coefficients is based on the Seawing glider presented in [Zhang et al.](https://www.researchgate.net/publication/256817942_Spiraling_motion_of_underwater_gliders_Modeling_analysis_and_experimental_results) 
 The paper also presents an analytical approach to the spiraling equilibria soultions trough an recrusive estimation. 
 
-##Running the script
-This repository contains two matlab files: Glider_main.m and Glider_function.m.
-Glider_function.m is the function that is being integrated by the ODE solver, and therefore the Glider_main.m file must be runned in order for the code to work.
+## Running the script
+Run the Glider_main.m file with the Glider_function.m file open. 
