@@ -10,7 +10,7 @@ Run the Glider_main.m file with the Glider_function.m file open.
 
 ## Plotting
 
-* xyz position in earth frame cooardinates
+* xyz position in earth frame coordinates
 * Pitch, Roll and Yaw angles (Theta, Phi, Psi)
 
 ### Characteristics of steady spiral motion
