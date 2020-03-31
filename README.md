@@ -1,4 +1,4 @@
-# MATLAB-Equations-of-motion
+# MATLAB simulation:  Spiral Motion of an Underwater Glider
 
 This is a matlab script that simulates the dynamics of an underwater glider in three-dimensional space. The equations of motion are numerically solved using the ODE45 (Runge Kutta) matlab solver.
 The main goal of the script is to simulate a steady spiral motion.
