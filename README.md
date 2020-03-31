@@ -9,6 +9,7 @@ The paper also presents an analytical approach to the spiraling equilibria soult
 Run the Glider_main.m file with the Glider_function.m file open. 
 
 ## Plotting
+The script plots the following
 
 * xyz position in earth frame coordinates
 * Pitch, Roll and Yaw angles (Theta, Phi, Psi)
