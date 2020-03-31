@@ -7,3 +7,17 @@ The paper also presents an analytical approach to the spiraling equilibria soult
 
 ## Running the script
 Run the Glider_main.m file with the Glider_function.m file open. 
+
+## Plotting
+The scripts plots the following:
+
+* xyz position in earth frame cooardinates
+* Pitch, Roll and Yaw angles (Theta, Phi, Psi)
+
+### Characteristics of steady spiral motion
+
+1. Pitch and Roll angles are constant.
+2. Given that there is no control inputs, the initial conditions should remain the same for pitch and roll 
+3. The change rate of the velocitiy V_dot should converge to 0 (at equilibria)
+4. The ballast mass is held constant, eg. mb_dot = 0
+
