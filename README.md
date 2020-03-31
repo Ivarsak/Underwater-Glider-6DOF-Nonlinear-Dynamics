@@ -21,3 +21,4 @@ The script plots the following
 3. The change rate of velocitiy V_dot should converge towards 0 (at equilibria)
 4. The ballast mass is held constant, ballast rate is zero -> mb_dot = 0
 
+Note: This only validates for either a downward or upward spiral motion. It does not account for the transition between the two states, which require change of ballast mass.
