@@ -1,4 +1,3 @@
-
 clear;
 clc;
 
@@ -138,7 +137,7 @@ save('Glider_variables.mat');
     fprintf('mb = %2.1f kg \n', mb_d);
     fprintf('Turning radius = %2.1f m \n', Radius);
     
-    [E,I] = ode45(@Glider,tspan,y0);
+    [E,I] = ode45(@Glider_function,tspan,y0);
      
               
 
@@ -169,4 +168,5 @@ subplot(4,1,4)
 plot(E, I(:,3)*180/pi)
 ylabel('Psi [deg]')                   %Plotting Yaw angle in degrees
 grid on
+
 

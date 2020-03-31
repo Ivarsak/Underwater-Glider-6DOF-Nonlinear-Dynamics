@@ -106,7 +106,7 @@ v_dot = inv(M)*(-M*[V; omega] + [cross(P, omega); cross(P_Ang, omega) + cross(P,
 
 %% Equations of motion in 3D
 
-R_dot =     R_1*omega;                    |     %Kinematic equation  
+R_dot =     R_1*omega;                          %Kinematic equation  
 b_dot =     R_2*V;                              %Kinematic equation 
 V_dot =     [v_dot(1) v_dot(2) v_dot(3)]';      %Dynamic equation 
 omega_dot = [v_dot(4) v_dot(5) v_dot(6)]';      %Dyamic equation 
