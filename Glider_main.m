@@ -1,25 +1,18 @@
+
 clear;
 clc;
 
+%See the readme file for info regarding the script
 
-%Read the 'Readme.txt file'
+%Inertial frame
 
-
-
-
-
-
-
-
-%Glider parameters
-
-N = [1 0 0]';                     %Unit vector along north in NED-frame
-E = [0 1 0]';                     %Unit vector along east in NED-frame
-D = [0 0 1]';                     %Unit vector along down in NED-frame
+N = [1 0 0]';                     %Unit vector along x
+E = [0 1 0]';                     %Unit vector along y
+D = [0 0 1]';                     %Unit vector along z
 
 I3 = eye(3);                      %Identity matrix (3x3)
 
-%% Masses
+%% Mass terms
 
 mrb = 54.28;                     %Hull mass [Kg]
 mp = 11;                         %Longitiudal and lateral moving mass [kg]
@@ -42,9 +35,9 @@ r_rb2 = 0;                       %Position of static mass block e2 direction
 r_rb3 = 0.0032;                  %Position of static mass block e3 direction
 
 rrb = [r_rb1 r_rb2 r_rb3]';      %Position of statick block [m]
+Rr = 0.014;                      %Movable mass offset position [m]
 
-
-%% Added Inerta terms
+%% Inerta terms
 
 I_x = 0.53;                      %Added inertia term 1 
 I_y = 7.88;                      %Added inertia term 2
@@ -55,14 +48,15 @@ I_A = diag([I_x I_y I_z]);       %Added inertia matrix
 I_rb = diag([0.60 15.27 15.32]); %Inertia of static block/hull
 I_rm = diag([0.02 10.16 0.17]);  %Inertia of movable block mass
 
-%% Added coupling terms
+%% Coupling term
 
-C_1 = 2.57;                     %Added coupling term 1
-C_2 = 3.61;                     %Added coupling term 2
+C_1 = 2.57;                      %Added coupling term 1
+C_2 = 3.61;                      %Added coupling term 2
 
-C_A = [0 0 0;                   %Added coupled matrix
-       0 0 C_1;
-       0 C_2 0]';
+
+C_A = [0 0 0;                    %Added coupled matrix
+       0 0 C_2;
+       0 C_1 0];
    
    
 %% Hydrodynamic coefficients
@@ -81,24 +75,27 @@ KMY = 34.10;                    %Coefficient of moment [MDL_3]
 Kr = -389.30;                   %Coefficient of moment [MDL_3]
 
 
-%% Equlibrium values for steady state spiral motion 
+%% Equilibrium values for steady state spiral motion 
+
+%These values are based on the simulation given in Zhang et al.
 
 Gamma_d = deg2rad(45);              % Servo Angle [Rad]
-xi_d = [deg2rad(-25),deg2rad(2)];   % Glider trajectory [Rad]
 Beta_d = deg2rad(-1.283);           % Sideslip anlge [Rad]
 Alpha_d = deg2rad(1.267);           % Angle of attack [Rad]
 Theta_d = deg2rad(-35.641);         % Pitch angle [Rad]
 Phi_d = deg2rad(-13.703);           % Roll angle [Rad]   
 rp1_d = 0.4216;                     % Moving mass block position [m]
-mb_d = 0.3;                        % Ballast mass [Kg]
+mb_d = 0.3;                         % Ballast mass [Kg]
 V_d = 0.490;                        % Velocity [m/s]
 Omega_3_d = 0.0039;                 % Turn rate [rad/s]
 
 
-v1_d = V_d*cos(Beta_d)*cos(Alpha_d);    %Translational velocity in x direction
-v2_d = V_d*sin(Beta_d);                 %Translational velcoity in y direction
-v3_d = V_d*cos(Beta_d)*sin(Alpha_d);    %Translational velocity in z direction
 
+v1_d = V_d*cos(Alpha_d)*cos(Beta_d);    %Initial velocity in x direction
+v2_d = V_d*sin(Beta_d);                 %Initial velocity in y direction
+v3_d = V_d*sin(Alpha_d)*cos(Beta_d);    %Initial velocity in z direction
+
+       
 %Save workspace for the glider function
 save('Glider_variables.mat');
 
@@ -108,18 +105,21 @@ save('Glider_variables.mat');
         %Initial conditions, this corresponds to the glidig Equlibria for a
         %steady spiral motion.
 
-        y0 = [ [Phi_d Theta_d 0]'     % Roll, Pitch, Yaw 
+        y0 = [
+               [Phi_d Theta_d 0]'     % Roll, Pitch, Yaw 
                [0 0 0]'               %XYZ position in earth frame [u v w]
                [0 0 Omega_3_d]'       %Angular velocities [p q r]
-               [v1_d v2_d v3_d]'      %Velocity [v1 v2 v3]
-               [rp1_d 0 0]'           %Position of moving mass block
+               [v1_d v2_d v3_d]'             %Velocity [v1 v2 v3]
+               [0 Gamma_d 0]'         %Position of moving mass block
                [0 0 0]'               %Position of the ballast mass
-               [0 Gamma_d 0]'         %Position of rolling mass block 
+               [rp1_d 0 0]'           %Position of rolling mass block 
                 mb_d ];               %Ballast mass
            
    
     
-    tspan = [0 300];
+    tspan = [0 100];                  %Interval for the ODE solver
+    
+    
     
     Radius = (V_d*cos(Theta_d-Alpha_d)/Omega_3_d);
     
@@ -137,14 +137,15 @@ save('Glider_variables.mat');
     fprintf('mb = %2.1f kg \n', mb_d);
     fprintf('Turning radius = %2.1f m \n', Radius);
     
-    [E,I] = ode45(@Glider_function,tspan,y0);
+    %Runge Kutta method
+    [E,I] = ode45(@Glider,tspan,y0);
      
               
 
 
 %% Plotting
 
-subplot(4,1,1)                     %3D plot with XYZ cooardinates in earth frame
+subplot(5,1,1)                     %3D plot with XYZ cooardinates in earth frame
 plot3(I(:,4), I(:,5), I(:,6))
 grid on
 xlabel('X [m]')
@@ -152,21 +153,36 @@ ylabel('Y [m]')
 zlabel('Z [m]')
 
 
-subplot(4,1,2)                      %Plotting Pitch angle in degrees
+subplot(5,1,2)                      %Plotting Pitch angle in degrees
 plot(E, I(:,2)*180/pi)
 ylabel('Theta [deg]')
 grid on
 
 
-subplot(4,1,3)                       %Plotting Roll angle in degrees
+subplot(5,1,3)                       %Plotting Roll angle in degrees
 plot(E, I(:,1)*180/pi)
 ylabel('Phi [deg]')
 grid on
 
 
-subplot(4,1,4)
+subplot(5,1,4)
 plot(E, I(:,3)*180/pi)
 ylabel('Psi [deg]')                   %Plotting Yaw angle in degrees
 grid on
+
+
+subplot(5,1,5)
+plot(E, I(:,10))
+ylabel('m/s')                          %Plotting angular velocity
+grid on
+
+hold on
+plot(E, I(:,11))
+plot(E, I(:,12))
+
+legend('v1 [m/s]','v2 [m/s]','v3 [m/s]');
+hold off
+
+
 
 
