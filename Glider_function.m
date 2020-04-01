@@ -25,10 +25,6 @@ u3 =  0;                           %Control input for ballast mass (constant)
 u4 =  [0 0 0]';                     %Control input for ballast mass position (neglected)
  
 
-%Position of the movable block
-rr = rp1_d*N + Rr*((cos(Gamma_d + (pi/2)))*E + (sin(Gamma_d + pi/2))*D);
-
-
    %% Computing Hydrodynamic forces
    
    vf = (V(1)^2 + V(2)^2 + V(3)^2);             
@@ -50,7 +46,8 @@ rr = rp1_d*N + Rr*((cos(Gamma_d + (pi/2)))*E + (sin(Gamma_d + pi/2))*D);
             sin(Beta) cos(Beta) 0;
             sin(Alpha)*cos(Beta) -sin(Alpha)*sin(Beta) cos(Alpha)];
    
-  
+  F = R_BF*F_ext; %Hydrodynamic force in flow frame
+  T = R_BF*T_ext; %Hydrodynamic moment in flow frame
   
 
 %% Kinematics
