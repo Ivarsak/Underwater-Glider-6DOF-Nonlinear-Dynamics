@@ -16,9 +16,9 @@ The script plots the following
 
 ### Characteristics of steady spiral motion
 
-1. Pitch and Roll angles are constant. Meaning that the moving mass block is fixed for a desired (equilibria point) pitch and roll angle.
+1. Pitch and Roll angles are constant, while the yaw angle changes at a constant rate. Meaning that the moving mass block is fixed for a desired (equilibria point) pitch and roll angle.
 2. Given that there is no control inputs, the initial conditions should remain the same for pitch and roll over time 
-3. The change rate of velocitiy V_dot should converge towards 0 (at equilibria)
-4. The ballast mass is held constant, ballast rate is zero -> mb_dot = 0
+3. The change rate of translational and angular velocitiy V_dot and Omega_dot respectively, should converge towards 0.
+4. The ballast mass is constant (equilibria point), which implies that the ballast rate is zero -> mb_dot = 0
 
 Note: This only validates for either a downward or upward spiral motion. It does not account for the transition between the two states, which require the ballast mass and the linear moving mass to change.
