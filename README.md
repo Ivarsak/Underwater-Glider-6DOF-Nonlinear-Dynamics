@@ -23,6 +23,6 @@ The script plots the following
 4. The ballast mass is fixed for the equilibria mass, which implies that the ballast rate is zero -> mb_dot = 0
 
 
-<img src="(https://user-images.githubusercontent.com/59923925/78356409-cc90f500-75af-11ea-978f-1beea733b0b1.png") width="500" height="500">
+<img src="https://user-images.githubusercontent.com/59923925/78356409-cc90f500-75af-11ea-978f-1beea733b0b1.png" width="500" height="500">
 
 Note: This only validates for either a downward or upward spiral motion. It does not account for the transition between the two states, which require the ballast mass and the linear moving mass to change.
