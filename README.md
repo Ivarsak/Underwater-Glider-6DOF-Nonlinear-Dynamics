@@ -22,4 +22,6 @@ The script plots the following
 3. The change rate of translational and angular velocitiy V_dot and Omega_dot respectively, should converge towards 0.
 4. The ballast mass is fixed for the equilibria mass, which implies that the ballast rate is zero -> mb_dot = 0
 
+
+
 Note: This only validates for either a downward or upward spiral motion. It does not account for the transition between the two states, which require the ballast mass and the linear moving mass to change.
