@@ -17,7 +17,7 @@ The script plots the following
 
 ### Characteristics of steady spiral motion
 
-1. Pitch and Roll angles are constant, while the yaw angle changes at a constant rate. Meaning that the moving mass block is fixed for a desired (equilibria point) pitch and roll angle.
+1. Pitch and Roll angles are constant, while the yaw angle changes at a constant rate. Meaning that the moving mass block is fixed for a desired (equilibria point) pitch and roll angle. Given these conditions the glider trajectory becomes a circular helix shown in the figure below.
 2. Given that there is no control inputs, the initial conditions should remain the same for pitch and roll over time 
 3. The change rate of translational and angular velocitiy V_dot and Omega_dot respectively, should converge towards 0.
 4. The ballast mass is fixed for the equilibria mass, which implies that the ballast rate is zero -> mb_dot = 0
