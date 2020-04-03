@@ -1,4 +1,3 @@
-
 clear;
 clc;
 
@@ -18,7 +17,7 @@ mrb = 54.28;                     %Hull mass [Kg]
 mp = 11;                         %Longitiudal and lateral moving mass [kg]
 m = 65.28;                       %Displacement of fluid mass [Kg]
 mb1 = 0.5;                       %Net bouyancy [Kg]
-mv = mrb + mp + mb1;             %Total vehicle mass [Kg]
+mv = mrb + mp + 0.3;             %Total vehicle mass [Kg]
 m0 = mv - m;                     %Buoyancy [kg]
 g = 9.81;                        %Gravity accleration
 
@@ -77,7 +76,7 @@ Kr = -389.30;                   %Coefficient of moment [MDL_3]
 
 %% Equilibrium values for steady state spiral motion 
 
-%These values are based on the simulation given in Zhang et al.
+%These values are based on the recrusive estimator given in Zhang et al.
 
 Gamma_d = deg2rad(45);              % Servo Angle [Rad]
 Beta_d = deg2rad(-1.283);           % Sideslip anlge [Rad]
@@ -90,12 +89,15 @@ V_d = 0.490;                        % Velocity [m/s]
 Omega_3_d = 0.0039;                 % Turn rate [rad/s]
 
 
+   
 
 v1_d = V_d*cos(Alpha_d)*cos(Beta_d);    %Initial velocity in x direction
 v2_d = V_d*sin(Beta_d);                 %Initial velocity in y direction
 v3_d = V_d*sin(Alpha_d)*cos(Beta_d);    %Initial velocity in z direction
 
-       
+
+ 
+ 
 %Save workspace for the glider function
 save('Glider_variables.mat');
 
@@ -107,24 +109,24 @@ save('Glider_variables.mat');
 
         y0 = [
                [Phi_d Theta_d 0]'     % Roll, Pitch, Yaw 
-               [0 0 0]'               %XYZ position in earth frame [u v w]
-               [0 0 Omega_3_d]'       %Angular velocities [p q r]
-               [v1_d v2_d v3_d]'             %Velocity [v1 v2 v3]
+               [0 0 0]'               %XYZ position in earth frame
+               [0 0 Omega_3_d]'       %Angular velocities
+               [v1_d v2_d v3_d]'      %Velocity 
                [0 Gamma_d 0]'         %Position of moving mass block
-               [0 0 0]'               %Position of the ballast mass
                [rp1_d 0 0]'           %Position of rolling mass block 
                 mb_d ];               %Ballast mass
            
    
     
-    tspan = [0 100];                  %Interval for the ODE solver
+    tspan = [0 8000];                  %Interval for the ODE solver
     
     
     
     Radius = (V_d*cos(Theta_d-Alpha_d)/Omega_3_d);
     
-    fprintf('Integration interval: Tspan = %f \n', tspan(2));
+    fprintf('Integration interval: Tspan = %2.1f \n', tspan(2));
     fprintf('\n');
+    fprintf('Note: Numerical integration can take up to several minutes for large intervals\n');
     fprintf('\n');
     fprintf('Values at equilibria (Initial conditions)\n');
     fprintf('\n');
@@ -137,13 +139,14 @@ save('Glider_variables.mat');
     fprintf('mb = %2.1f kg \n', mb_d);
     fprintf('Turning radius = %2.1f m \n', Radius);
     
-    %Runge Kutta method
+    %Runge Kutta solver
     [E,I] = ode45(@Glider,tspan,y0);
      
               
 
 
 %% Plotting
+
 
 subplot(5,1,1)                     %3D plot with XYZ cooardinates in earth frame
 plot3(I(:,4), I(:,5), I(:,6))
@@ -153,15 +156,17 @@ ylabel('Y [m]')
 zlabel('Z [m]')
 
 
+
+
 subplot(5,1,2)                      %Plotting Pitch angle in degrees
-plot(E, I(:,2)*180/pi)
-ylabel('Theta [deg]')
+plot(E, I(:,1)*180/pi)
+ylabel('Phi [deg]')
 grid on
 
 
 subplot(5,1,3)                       %Plotting Roll angle in degrees
-plot(E, I(:,1)*180/pi)
-ylabel('Phi [deg]')
+plot(E, I(:,2)*180/pi)
+ylabel('Theta [deg]')
 grid on
 
 
@@ -173,7 +178,7 @@ grid on
 
 subplot(5,1,5)
 plot(E, I(:,10))
-ylabel('m/s')                          %Plotting angular velocity
+ylabel('m/s')                          %Plotting velocity
 grid on
 
 hold on
