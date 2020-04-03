@@ -13,6 +13,7 @@ The script plots the following
 
 * xyz position in earth frame coordinates
 * Pitch, Roll and Yaw angles (Theta, Phi, Psi)
+* Velocity
 
 ### Characteristics of steady spiral motion
 
