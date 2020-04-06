@@ -34,7 +34,7 @@ r_rb2 = 0;                       %Position of static mass block e2 direction
 r_rb3 = 0.0032;                  %Position of static mass block e3 direction
 
 rrb = [r_rb1 r_rb2 r_rb3]';      %Position of statick block [m]
-Rr = 0.014;                      %Movable mass offset position [m]
+Rr = 0.014;                      %Movable mass offset [m]
 
 %% Inerta terms
 
@@ -118,7 +118,7 @@ save('Glider_variables.mat');
            
    
     
-    tspan = [0 8000];                  %Interval for the ODE solver
+    tspan = [0 100];                  %Interval for the ODE solver
     
     
     
@@ -140,7 +140,7 @@ save('Glider_variables.mat');
     fprintf('Turning radius = %2.1f m \n', Radius);
     
     %Runge Kutta solver
-    [E,I] = ode45(@Glider,tspan,y0);
+    [E,I] = ode45(@Glider_function,tspan,y0);
      
               
 

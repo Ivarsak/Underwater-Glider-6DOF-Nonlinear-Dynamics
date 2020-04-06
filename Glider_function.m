@@ -1,4 +1,4 @@
-function T=Glider(T,y)
+function T=Glider_function(T,y)
 
 load('Glider_variables');
 
@@ -17,12 +17,11 @@ Beta  = atan(V(2)/(sqrt(V(1)^2 + V(2) + V(3)^2)));  %Sideslip angle
 
 
 
-rb =  [0 0 0]';                    %Position of ballast mass (neglected)
 u1 =  [0 0 0]';                    %Control input for longitudal moving mass (constant)
 u2 =  [0 0 0]';                    %Control input for lateral moving mass (constant)
 u3 =  0;                           %Control input for ballast mass (constant)
 
-   %% Computing Hydrodynamic forces
+   %% Computing Hydrodynamic forces and Moments
    
    vf = V(1)^2 + V(3)^2 + V(3)^2;             
 
@@ -88,7 +87,7 @@ rr = rp1_d*N + Rr*(cos(Gamma_d +  pi/2))*E + Rr*(sin(Gamma_d + pi/2)*D);
 F1 = R_2*R_BF*F_ext; %Hydrodynamic force in body frame
 T1 = R_2*R_BF*T_ext; %Hydrodynamic moment in body frame
  
-M11 =  M_A + ((mrb + mp)*I3);
+M11 =  M_A + ((mrb + mb + mp)*I3);
 M12 =  C_A - mrb*rrb_hat - mp*rp_hat; 
 M21 =  C_A' + (-mrb*rrb_hat - mp*rp_hat)';
 M22 =  I_A + I_rb + (R_x'*I_rm*R_x) - mp*rp_hat*rp_hat - mrb*rrb_hat*rrb_hat;
