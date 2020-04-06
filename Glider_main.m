@@ -118,7 +118,7 @@ save('Glider_variables.mat');
            
    
     
-    tspan = [0 100];                  %Interval for the ODE solver
+    tspan = [0 8000];                  %Interval for the ODE solver
     
     
     
