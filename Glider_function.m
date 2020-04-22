@@ -2,9 +2,9 @@ function T=Glider_function(t,y)
 
 load('Glider_variables');
 
-R =         y(1:3);                 %R(1) = Theta, R(2) = Theta, R(3) = Psi
-b =         y(4:6);                 %b(1) = x, b(2) = y, b(3) = z in earth frame
-omega =     y(7:9);                %omega(1) = p, omega(2) = q, omega(3) = r
+R =         y(1:3);                 %R(1) = Phi (roll), R(2) = Theta (pitch), R(3) = Psi (yaw)
+b =         y(4:6);                 %b(1) = x, b(2) = y, b(3) = z
+omega =     y(7:9);                 %omega(1) = p, omega(2) = q, omega(3) = r
 V =         y(10:12);               %V(1) = V1, V(2) = V2, V(3) = V3 in body frame
 rp =        y(13:15);               %rp(1) = rp1, rp(2) = rp2, rp(3) = rp3 position of moving mass block
 r_gamma =   y(16:18);               %r_gamma(1) = 0, r_gamma(2) = Gamma, r_gamma(3) = 0 position of rolling mass block
