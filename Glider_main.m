@@ -5,9 +5,9 @@ clc;
 
 %Inertial frame
 
-N = [1 0 0]';                     %Unit vector along x
-E = [0 1 0]';                     %Unit vector along y
-D = [0 0 1]';                     %Unit vector along z
+e1 = [1 0 0]';                     %Body frame unit vector along x
+e2 = [0 1 0]';                     %Body frame unit vector along y
+e3 = [0 0 1]';                     %Body frame unit vector along z
 
 I3 = eye(3);                      %Identity matrix (3x3)
 
@@ -16,9 +16,6 @@ I3 = eye(3);                      %Identity matrix (3x3)
 mrb = 54.28;                     %Hull mass [Kg]
 mp = 11;                         %Longitiudal and lateral moving mass [kg]
 m = 65.28;                       %Displacement of fluid mass [Kg]
-mb1 = 0.5;                       %Net bouyancy [Kg]
-mv = mrb + mp + 0.3;             %Total vehicle mass [Kg]
-m0 = mv - m;                     %Buoyancy [kg]
 g = 9.81;                        %Gravity accleration
 
 %Added mass terms
@@ -34,6 +31,7 @@ r_rb2 = 0;                       %Position of static mass block e2 direction
 r_rb3 = 0.0032;                  %Position of static mass block e3 direction
 
 rrb = [r_rb1 r_rb2 r_rb3]';      %Position of statick block [m]
+
 Rr = 0.014;                      %Movable mass offset [m]
 
 %% Inerta terms
@@ -54,9 +52,13 @@ C_2 = 3.61;                      %Added coupling term 2
 
 
 C_A = [0 0 0;                    %Added coupled matrix
-       0 0 C_2;
+       0 0 0;
        0 C_1 0];
    
+ C_A2 = [0 0 0;                    %Added coupled matrix
+         0 0 0;
+         0 -C_2 0];
+
    
 %% Hydrodynamic coefficients
 
@@ -89,12 +91,10 @@ V_d = 0.490;                        % Velocity [m/s]
 Omega_3_d = 0.0039;                 % Turn rate [rad/s]
 
 
-   
 
-v1_d = V_d*cos(Alpha_d)*cos(Beta_d);    %Initial velocity in x direction
-v2_d = V_d*sin(Beta_d);                 %Initial velocity in y direction
-v3_d = V_d*sin(Alpha_d)*cos(Beta_d);    %Initial velocity in z direction
-
+v1_d = V_d*cos(Alpha_d)*cos(Beta_d)    %Initial velocity in x direction
+v2_d = V_d*sin(Beta_d)                 %Initial velocity in y direction
+v3_d = V_d*sin(Alpha_d)*cos(Beta_d)    %Initial velocity in z direction
 
  
  
@@ -118,7 +118,7 @@ save('Glider_variables.mat');
            
    
     
-    tspan = [0 8000];                  %Interval for the ODE solver
+    tspan = [0 10];                  %Interval for the ODE solver
     
     
     
@@ -147,24 +147,29 @@ save('Glider_variables.mat');
 
 %% Plotting
 
-
-subplot(5,1,1)                     %3D plot with XYZ cooardinates in earth frame
-plot3(I(:,4), I(:,5), I(:,6))
+figure(1)
+subplot(5,1,1)                     
+plot(E, I(:,10))
+ylabel('m/s')                          %Plotting velocity
 grid on
-xlabel('X [m]')
-ylabel('Y [m]')
-zlabel('Z [m]')
+
+hold on
+plot(E, I(:,11))
+plot(E, I(:,12))
+
+legend('V1 [m/s]','V2 [m/s]','V3 [m/s]');
+hold off
 
 
 
 
-subplot(5,1,2)                      %Plotting Pitch angle in degrees
+subplot(5,1,2)                      %Plotting roll angle in degrees
 plot(E, I(:,1)*180/pi)
 ylabel('Phi [deg]')
 grid on
 
 
-subplot(5,1,3)                       %Plotting Roll angle in degrees
+subplot(5,1,3)                       %Plotting pitch angle in degrees
 plot(E, I(:,2)*180/pi)
 ylabel('Theta [deg]')
 grid on
@@ -177,17 +182,21 @@ grid on
 
 
 subplot(5,1,5)
-plot(E, I(:,10))
-ylabel('m/s')                          %Plotting velocity
+plot(E, I(:,7))
+ylabel('rad/s')                       %Plotting angular velocity
 grid on
 
 hold on
-plot(E, I(:,11))
-plot(E, I(:,12))
+plot(E, I(:,8))
+plot(E, I(:,9))
 
-legend('v1 [m/s]','v2 [m/s]','v3 [m/s]');
+legend('p [rad/s]','q [rad/s]','r [rad/s]');
 hold off
 
-
-
+figure(2)
+plot3(I(:,4), I(:,5), I(:,6))
+grid on
+xlabel('North [m]')
+ylabel('East [m]')
+zlabel('Down [m]')
 
