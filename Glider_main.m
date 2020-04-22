@@ -3,7 +3,6 @@ clc;
 
 %See the readme file for info regarding the script
 
-%Inertial frame
 
 e1 = [1 0 0]';                     %Body frame unit vector along x
 e2 = [0 1 0]';                     %Body frame unit vector along y
@@ -51,11 +50,11 @@ C_1 = 2.57;                      %Added coupling term 1
 C_2 = 3.61;                      %Added coupling term 2
 
 
-C_A = [0 0 0;                    %Added coupled matrix
+C_A = [0 0 0;                    %Added coupled matrix 1
        0 0 0;
        0 C_1 0];
    
- C_A2 = [0 0 0;                    %Added coupled matrix
+ C_A2 = [0 0 0;                    %Added coupled matrix 2
          0 0 0;
          0 -C_2 0];
 

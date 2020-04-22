@@ -12,8 +12,8 @@ mb =        y(19);                  %mb -> ballast mass
 
 v_r = sqrt(V(1)^2 + V(2)^2 + V(3)^2)
 
-Alpha = atan(V(3)/V(1));             %Angle of attack
-Beta  = asin(V(2)/v_r);              %Sideslip angle
+Alpha = atan(V(3)/V(1));           %Angle of attack
+Beta  = asin(V(2)/v_r);            %Sideslip angle
 
 
 u1 =  [0 0 0]';                    %Control input for longitudal moving mass (constant)
@@ -93,8 +93,8 @@ rr = rp1_d*e1 + Rr*(cos(Gamma_d + pi/2)*e2 + sin(Gamma_d + pi/2)*e3);
  %Note: Position of the linear ballast mass are neglected in the
  %generalized inertia matrix and the dynamic equations
 
-F_h = inv(R_2)*R_BF*F_ext; %Hydrodynamic force in body frame
-T_h = inv(R_2)*R_BF*T_ext; %Hydrodynamic moment in body fra<me
+F_h = inv(R_2)*R_BF*F_ext; %Hydrodynamic force in the NED frame
+T_h = inv(R_2)*R_BF*T_ext; %Hydrodynamic moment in the NED frame
 
  
 M11 =  M_A + ((mrb + mb + mp)*I3);
