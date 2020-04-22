@@ -56,7 +56,7 @@ C_A = [0 0 0;                    %Added coupled matrix 1
    
  C_A2 = [0 0 0;                    %Added coupled matrix 2
          0 0 0;
-         0 -C_2 0];
+         0 C_2 0];
 
    
 %% Hydrodynamic coefficients
@@ -117,7 +117,7 @@ save('Glider_variables.mat');
            
    
     
-    tspan = [0 10];                  %Interval for the ODE solver
+    tspan = [0 10000];                  %Interval for the ODE solver
     
     
     
