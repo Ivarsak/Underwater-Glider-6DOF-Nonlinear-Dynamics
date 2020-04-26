@@ -44,7 +44,7 @@ u3 =  0;                           %Control input for ballast mass (constant)
         
 %% Kinematics
 
-% Rotation matrix to map the angular velocities in the body frame
+% Rotation matrix to map the Euler Angle attitudes
 R_1 = [1 sin(R(1))*tan(R(2)) cos(R(1))*tan(R(2));
        0    cos(R(1))            -sin(R(1));
        0 sin(R(1))*sec(R(2))    cos(R(1))*sec(R(2))];
