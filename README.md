@@ -6,11 +6,11 @@ This is a matlab script that simulates the dynamics of an underwater glider in t
  
 ### Snapshots
 
-<img src="https://user-images.githubusercontent.com/59923925/106399047-b691d200-6416-11eb-9be3-2dc0fb4da615.png" width="500" height="500">
+<img src="https://user-images.githubusercontent.com/59923925/106399047-b691d200-6416-11eb-9be3-2dc0fb4da615.png" width="300" height="300">
 
 
 
-<img src="https://user-images.githubusercontent.com/59923925/106398998-72063680-6416-11eb-88f0-e0137d4383e7.png" width="500" height="500">
+<img src="https://user-images.githubusercontent.com/59923925/106398998-72063680-6416-11eb-88f0-e0137d4383e7.png" width="300" height="300">
 
-<img src="https://user-images.githubusercontent.com/59923925/106399052-b98cc280-6416-11eb-8fc5-5a6aac4ebf39.png" width="500" height="500">
+<img src="https://user-images.githubusercontent.com/59923925/106399052-b98cc280-6416-11eb-8fc5-5a6aac4ebf39.png" width="300" height="300">
 
