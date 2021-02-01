@@ -129,11 +129,11 @@ b_dot =     R_2*V;                              %Kinematic equation 2
 V_dot =     [v_dot(1) v_dot(2) v_dot(3)]';      %Dynamic equation 
 omega_dot = [v_dot(4) v_dot(5) v_dot(6)]';      %Dyamic equation 
 
-%Control inputs --> Only constant/initial conditions in this simulation
+%Control inputs
 
-rp1_dot =   u1;         %change rate = [0 0 0]'
-Gamma_dot = u2;         %change rate = [0 0 0]'
-mb_dot =    u3;         %change rate = 0
+rp1_dot =   u1;         
+Gamma_dot = u2;         
+mb_dot =    u3;         
 
 
 
