@@ -127,9 +127,9 @@ omega_dot = [v_dot(4) v_dot(5) v_dot(6)]'      %Dyamic equation
 
 %Control inputs
 
-rp1_dot =   u_mp;         %change rate = [0 0 0]'
-Gamma_dot = u_gamma;      %change rate = [0 0 0]'
-mb_dot =    u_mb;         %change rate = 0
+rp1_dot =   u_mp;         
+Gamma_dot = u_gamma;      
+mb_dot =    u_mb;        
 
 
 %Return vector for the ODE45 solver
