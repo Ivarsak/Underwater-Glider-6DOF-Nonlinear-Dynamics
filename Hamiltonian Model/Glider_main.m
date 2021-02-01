@@ -51,14 +51,10 @@ C_2 = 3.61;                      %Added coupling term 2
 
 
 C_A = [0 0 0;                    %Added coupled matrix 1
-       0 0 0;
+       0 0 C_2;
        0 C_1 0];
-   
- C_A2 = [0 0 0;                    %Added coupled matrix 2
-         0 0 0;
-         0 C_2 0];
 
-   
+
 %% Hydrodynamic coefficients
 
 KD0 = 7.19;                     %Coefficient of Drag force [D]
