@@ -99,7 +99,7 @@ T_h = inv(R_2)*R_BF*T_ext; %Hydrodynamic moment in the NED frame
  
 M11 =  M_A + ((mrb + mb + mp)*I3);
 M12 =  C_A - mrb*rrb_hat - mp*rp_hat; 
-M21 =  C_A2 -(mrb*rrb_hat + mp*rp_hat)';
+M21 =  C_A -(mrb*rrb_hat + mp*rp_hat)';
 M22 =  I_A + I_rb + (R_x'*I_rm*R_x) - mp*rp_hat*rp_hat - mrb*rrb_hat*rrb_hat;
 
 
